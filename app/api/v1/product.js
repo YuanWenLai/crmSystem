@@ -14,6 +14,7 @@ router.get('/', async ctx => {
 router.post('/add',async ctx => {
   const v = await new AddProductValidator().validate(ctx)
   let params = ctx.request.body
+
   await Product.addProduct(params)
   ctx.body = {
     message:'add ok!',

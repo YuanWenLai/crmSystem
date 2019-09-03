@@ -8,28 +8,12 @@ class Customer extends Model{
   }
   //添加客户
   static  async addCustomer(params){
-    return  await Customer.create({
-      username:params.username,
-      age:params.age,
-      sex:params.sex,
-      phone:params.phone,
-      address:params.address,
-      income:params.income,
-      career:params.career
-    })
+    return  await Customer.create(params)
   }
 
   //更新用户
   static async updateCustomer(params){
-    return await Customer.update({
-      username:params.username,
-      age:params.age,
-      sex:params.sex,
-      phone:params.phone,
-      address:params.address,
-      income:params.income,
-      career:params.career
-    },{
+    return await Customer.update(params,{
       where:{
         id:params.id
       }

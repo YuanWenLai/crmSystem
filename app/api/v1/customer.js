@@ -9,7 +9,6 @@ const router = new Router({
 //获取客户列表
 router.get('/', async ctx=> {
   const result = await Customer.getCustomerList()
-  console.log(666)
   ctx.body = {
     result
   }
@@ -30,7 +29,13 @@ router.post('/addCustomer', async  ctx => {
 router.post('/updateCustomer',async ctx=>{
   const v = await new AddCustomerValidator().validate(ctx)
   let params = ctx.request.body
-  await Customer.updateCustomer(params)
+  let ret = await Customer.updateCustomer(params)
+  if(ret[0]){
+    ctx.body = {
+      message:'update err!',
+      code:403
+    }
+  }
   ctx.body = {
     message:'update ok!',
     code:200

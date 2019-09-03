@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize')
+const Model = require('sequelize')
 
 const {dbName,host,port,user,password} = require('../config/config').database
 
@@ -26,6 +27,22 @@ sequelize.sync({
   //开发阶段调试成false，避免每一次刷新一次删除一次数据库
   force:false
 })
+
+/*//全局处理序列化
+Model.prototype.toJSON = function(){
+  //1.在全局中去除不要的数据
+  let data = clone(this.dataValues)
+  unset(data,'updated_at')
+  unset(data,'created_at')
+  unset(data,'deleted_at')
+  //2.在API返回结果前，局部去除不要的字段，如art.excludde['id']，去除id字段
+  if(isArray(this.exclude)){
+    this.exclude.forEach( val =>{
+      unset(data,val)
+    })
+  }
+  return data
+}*/
 
 module.exports = {
   sequelize

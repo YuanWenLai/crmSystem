@@ -97,14 +97,13 @@ class AddCustomerValidator extends LinValidator{
   constructor(){
     super()
     this.age = [
-      new Rule('isInt','需要是正整数',{min:1})
+      new Rule('isLength','不能为空',{min:1})
     ]
     this.phone = [
-      new Rule('isLength','需要是11位手机号',{min:11}),
-      new Rule('isInt','需要是正整数',{min:1})
+      new Rule('isLength','需要是11位手机号',{min:2}),
     ]
     this.income = [
-      new Rule('isInt','需要是正整数',{min:1})
+      new Rule('isLength','不能为空',{min:1})
     ]
   }
 }
@@ -138,6 +137,41 @@ class AddProductValidator extends LinValidator{
   }
 }
 
+//验证反馈信息
+class FeedbackValidator extends LinValidator{
+  constructor(){
+    super()
+    this.comment = [
+      new Rule('isLength','最少两个字符串',{min:2}),
+    ]
+    this.user_id = [
+      new Rule('isInt','需要是正整数',{min:1})
+    ]
+    this.faithful = [
+      new Rule('isInt','需要是正整数')
+    ]
+    this.satisfaction = [
+      new Rule('isInt','需要是正整数')
+    ]
+  }
+}
+
+//验证订单表的信息
+class OrderValidator extends LinValidator{
+  constructor(){
+    super()
+    this.user_id = [
+      new Rule('isInt','需要是正整数',{min:1})
+    ]
+    this.product_id = [
+      new Rule('isInt','需要是正整数',{min:1})
+    ]
+    this.price = [
+      new Rule('isInt','需要是正整数',{min:1})
+    ]
+  }
+}
+
 module.exports = {
   PositiveIntegerValidator,
   RegisterValidator,
@@ -146,5 +180,7 @@ module.exports = {
   LoginValidator,
   AddCustomerValidator,
   AddFinanceValidator,
-  AddProductValidator
+  AddProductValidator,
+  FeedbackValidator,
+  OrderValidator
 }

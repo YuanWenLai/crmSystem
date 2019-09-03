@@ -9,6 +9,7 @@ class InitManager {
     InitManager.loadConfig()
   }
 
+  //全局导入配置
   static loadConfig(path = ''){
     //用于将config的方法导入到全局中
     const configPath = path || `${process.cwd()}/config/config`
@@ -25,7 +26,6 @@ class InitManager {
       //visit是观察回调函数
       visit:whenLoadModle
     })
-
     function whenLoadModle(obj){
       if(obj instanceof Router){
         InitManager.app.use(obj.routes())

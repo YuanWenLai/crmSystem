@@ -10,18 +10,12 @@ class Product extends Model{
 
   //增加产品信息
   static async addProduct(params){
-    return await Product.create({
-      product_name:params.product_name,
-      content:params.content
-    })
+    return await Product.create(params)
   }
 
   //更新产品信息
   static async updateProduct(params){
-    return await Product.update({
-      product_name:params.product_name,
-      content:params.content
-    },{
+    return await Product.update(params,{
       where:{
         id:params.id
       }
@@ -45,7 +39,10 @@ Product.init({
     autoIncrement:true
   },
   product_name:Sequelize.STRING,
-  content:Sequelize.STRING
+  content:Sequelize.STRING,
+  number:Sequelize.STRING,
+  people_sum:Sequelize.STRING,
+  failthful:Sequelize.STRING
 },{
   sequelize,
   tableName:'product'

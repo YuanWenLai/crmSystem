@@ -16,11 +16,7 @@ class Finance extends Model{
 
   //更新财务单
   static async updateFinance(params){
-    return await Finance.update({
-      month:params.month,
-      cost:params.cost,
-      income:params.income
-    },{
+    return await Finance.update(params,{
       where:{
         id:params.id
       }
